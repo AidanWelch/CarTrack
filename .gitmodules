@@ -1,0 +1,3 @@
+[submodule "OpenTrafficCam"]
+	path = OpenTrafficCam
+	url = https://github.com/AidanWelch/OpenTrafficCam
