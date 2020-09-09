@@ -10,6 +10,6 @@ int main(int argc, char** argv){
     cv::imshow("Display Image", image);
 
     cv::waitKey(0);
-    CameraParse("");
+    CameraParse(argv[1]);
     return 0;
 }
