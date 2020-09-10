@@ -10,8 +10,9 @@ struct Camera {
     std::string url, encoding, format, update_rate, marked_for_review;
 };
 
-#define COUNTIES std::map <std::string, std::list <Camera>>
-typedef std::map <std::string, COUNTIES> CameraList;
+typedef std::list <Camera> County;
+typedef std::map <std::string, County> State;
+typedef std::map <std::string, State> CameraList;
 // Structured [(state_name, [(county_name, [cameras]), ...]), ...]
 
 CameraList CameraParse(std::string file_path);
