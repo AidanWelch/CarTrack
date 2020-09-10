@@ -63,8 +63,7 @@ CameraList CameraParse(std::string file_path) {
                         cur_county_name = key;
                         cur_county.clear();
                     } else if (movement == 1) {
-                        cur_county.push_back(cur_camera);
-                        cur_camera = *new Camera;
+                        cur_county.push_back(std::move(cur_camera));
                     }
                     break;
 
