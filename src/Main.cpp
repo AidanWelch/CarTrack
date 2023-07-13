@@ -3,13 +3,13 @@
 #include "utils/CameraListParser.h"
 
 int main(int argc, char** argv){
-    CameraList cameras = CameraParse(argv[1]);
-    std::cout << "cams" << std::endl;
-    State ky = cameras["Kentucky"];
-    std::cout << "ky" << std::endl;
-    County jefferson = ky["Jefferson"];
-    std::cout << "jeff" << std::endl;
-    Camera cam = jefferson.front();
-    std::cout << cam.description << std::endl;
-    return 0;
+	CameraList cameras = CameraParse(argv[1]);
+	std::cout << "cams" << std::endl;
+	State ky = cameras["Kentucky"];
+	std::cout << "ky" << std::endl;
+	County jefferson = ky["Jefferson"];
+	std::cout << "jeff" << std::endl;
+	Camera cam = jefferson.front();
+	std::cout << cam.description << std::endl;
+	return 0;
 }
