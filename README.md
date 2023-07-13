@@ -3,7 +3,7 @@ An open-source tool to track and identify cars on publicly accessible traffic ca
 
 ## Build
 
-### Prerequisites 
+### Prerequisites
 - CMake
 - Ninja
 - OpenCV
@@ -16,4 +16,5 @@ An open-source tool to track and identify cars on publicly accessible traffic ca
 5. `./CarTrack`
 
 Disclaimer:
-This tool is provided under absolutely no guarantee of accuracy.  Like any AI system it is fallible and should not be considered any form of proof, especially in a court of law.
+This tool is provided under absolutely no guarantee of accuracy.  Like any AI system it is fallible and should not be considered any form of proof of guilt, especially in a court of law.
+By using this tool you agree to not use as any form of evidence of guilt, or liability- but it may be used in defense.
