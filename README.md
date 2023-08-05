@@ -6,14 +6,12 @@ An open-source tool to track and identify cars on publicly accessible traffic ca
 ### Prerequisites
 - CMake
 - Ninja
-- OpenCV
 
 ### Building
-1. Open a terminal in `./build`
-2. `cmake ..`
-3. `../build.sh`
-4. `ninja`
-5. `./CarTrack`
+
+1. Run relevant build script
+2. Run the command `ninja`
+3. ~~Profit~~ Run the executable in build
 
 Disclaimer:
 This tool is provided under absolutely no guarantee of accuracy.  Like any AI system it is fallible and should not be considered any form of proof of guilt, especially in a court of law.

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "CameraListParser.h"
+#include "camera_list_parser.h"
 
 CameraList CameraParse(std::string file_path) {
 	std::ifstream file;
@@ -21,7 +21,7 @@ CameraList CameraParse(std::string file_path) {
 			std::string key;
 			bool key_ended = false;
 			std::string value;
-			for(uint i = 0; i < line.length(); i++){
+			for(unsigned long long int i = 0; i < line.length(); i++){
 				if((line[i] == '{' || line[i] == '[') && !in_string ){
 					movement--;
 					nesting = static_cast<Nest>(nesting+1);

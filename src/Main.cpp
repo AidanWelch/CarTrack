@@ -1,6 +1,6 @@
 #include <iostream> //namespace std
-#include <opencv2/opencv.hpp> //namespace cv
-#include "utils/CameraListParser.h"
+// #include <opencv2/opencv.hpp> //namespace cv
+#include "utils/camera_list_parser.h"
 
 int main(int argc, char** argv){
 	CameraList cameras = CameraParse(argv[1]);
