@@ -2,12 +2,14 @@
 #include <fstream>
 #include "camera_list_parser.h"
 
+enum NEST {NONE, COUNTRY, STATE, COUNTY, CAMERA, LOCATION};
+
 CameraList CameraParse(std::string file_path) {
 	std::ifstream file;
 	file.open(file_path, std::ios::in);
 	if(file){
 		CameraList cameras;
-		enum Nest {NONE, COUNTRY, STATE, COUNTY, CAMERA, LOCATION} nesting = NONE;
+		NEST nesting = NONE;
 		std::string cur_state_name;
 		State cur_state;
 		std::string cur_county_name;
@@ -24,10 +26,10 @@ CameraList CameraParse(std::string file_path) {
 			for(unsigned long long int i = 0; i < line.length(); i++){
 				if((line[i] == '{' || line[i] == '[') && !in_string ){
 					movement--;
-					nesting = static_cast<Nest>(nesting+1);
+					nesting = static_cast<NEST>(nesting+1);
 				} else if ((line[i] == '}' || line[i] == ']') && !in_string ) {
 					movement++;
-					nesting = static_cast<Nest>(nesting-1);
+					nesting = static_cast<NEST>(nesting-1);
 				} else if (line[i] == ':' && !in_string && !key_ended) {
 					key_ended = true;
 				} else if (line[i] == '"' && !escaped) {
