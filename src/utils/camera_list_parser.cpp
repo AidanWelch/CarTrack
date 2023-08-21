@@ -7,96 +7,128 @@ enum NEST {NONE, COUNTRY, STATE, COUNTY, CAMERA, LOCATION};
 CameraList CameraParse(std::string file_path) {
 	std::ifstream file;
 	file.open(file_path, std::ios::in);
-	if(file){
-		CameraList cameras;
-		NEST nesting = NONE;
-		std::string cur_state_name;
-		State cur_state;
-		std::string cur_county_name;
-		County cur_county;
-		Camera cur_camera;
-		std::string line;
-		while(std::getline(file, line)){
-			int movement = 0;
-			bool escaped = false;
-			bool in_string = false;
-			std::string key;
-			bool key_ended = false;
-			std::string value;
-			for(unsigned long long int i = 0; i < line.length(); i++){
-				if((line[i] == '{' || line[i] == '[') && !in_string ){
-					movement--;
-					nesting = static_cast<NEST>(nesting+1);
-				} else if ((line[i] == '}' || line[i] == ']') && !in_string ) {
-					movement++;
-					nesting = static_cast<NEST>(nesting-1);
-				} else if (line[i] == ':' && !in_string && !key_ended) {
-					key_ended = true;
-				} else if (line[i] == '"' && !escaped) {
-					in_string = !in_string;
-				} else if ((line[i] != ' ' && line[i] != ',') || in_string){
-					if(!key_ended){
-						key.push_back(line[i]);
-					} else {
-						value.push_back(line[i]);
-					}
-				}
-				escaped = (line[i] == '\\' && !escaped);
-			}
-			switch(nesting){
-				case NONE:
-					break;
-				case COUNTRY:
-					if (movement == 1) {
-						cameras[cur_state_name] = cur_state;
-					}
-					break;
-				case STATE:
-					if(key_ended && movement == -1){
-						cur_state_name = key;
-						cur_state.clear();
-					} else if (movement == 1) {
-						cur_state[cur_county_name] = cur_county;
-					}
-					break;
-
-				case COUNTY:
-					if(key_ended && movement == -1){
-						cur_county_name = key;
-						cur_county.clear();
-					} else if (movement == 1) {
-						cur_county.push_back(std::move(cur_camera));
-					}
-					break;
-
-				case CAMERA:
-				case LOCATION:
-					if(key.length() != 0 && value.length() != 0){
-						if(key == "description"){
-							cur_camera.description = value;
-						} else if (key == "direction") {
-							cur_camera.direction = value;
-						} else if (key == "latitude") {
-							cur_camera.latitude = value;
-						} else if (key == "longitude") {
-							cur_camera.longitude = value;
-						} else if (key == "url") {
-							cur_camera.url = value;
-						} else if (key == "encoding") {
-							cur_camera.encoding = value;
-						} else if (key == "update_rate") {
-							cur_camera.update_rate = value;
-						} else if (key == "marked_for_review"){
-							cur_camera.marked_for_review = value;
-						}
-					}
-					break;
-			}
-		}
-		file.close();
-		return cameras;
-	} else {
+	if(!file.is_open()){
 		std::cerr << "Could not open \"" << file_path << '"' << std::endl;
 		exit(EXIT_FAILURE);
 	}
+	CameraList cameras;
+	cameras.emplace_back();
+	NEST nesting = NONE;
+	std::string cur_state;
+	std::string cur_county;
+	bool escaped = false;
+	bool in_string = false;
+	std::string key;
+	bool key_ended = false;
+	std::string value;
+	std::string line;
+	while(std::getline(file, line)){
+		for (unsigned long long int i = 0; i < line.length(); i++){
+			if (in_string) {
+				if (line[i] == '"' && !escaped) {
+					in_string = false;
+				} else {
+					if (key_ended) {
+						value.push_back(line[i]);
+					} else {
+						key.push_back(line[i]);
+					}
+					if (escaped) {
+						escaped = false;
+					} else if (line[i] == '\\') {
+						escaped = true;
+					}
+				}
+			} else {
+				switch (line[i]) {
+					case ' ':
+					case '	':
+					case '\r':
+					case '\n':
+						break;
+					case '"':
+						in_string = true;
+						break;
+					case ':':
+						key_ended = true;
+						value.clear(); // Clear value before next
+						break;
+					case '{':
+					case '[':
+						nesting = static_cast<NEST>(nesting+1);
+						switch (nesting) {
+							case STATE:
+								cur_state = key;
+								break;
+							case COUNTY:
+								cur_county = key;
+								break;
+							default:
+								break;
+						}
+						key.clear();
+						key_ended = false;
+						break;
+					case '}':
+					case ']':
+						if (!key_ended) {
+							if (nesting == CAMERA) {
+								cameras.back().state = cur_state;
+								cameras.back().county = cur_county;
+								cameras.emplace_back();
+							}
+							nesting = static_cast<NEST>(nesting-1);
+							break;
+						}
+						// Fallthrough if last member not pushed(it generally isn't)
+					case ',':
+						key_ended = false;
+						if (nesting == CAMERA || nesting == LOCATION){
+							if(!key.empty() && !value.empty()){
+								if(key == "description"){
+									cameras.back().description = std::move(value);
+								} else if (key == "direction") {
+									cameras.back().direction = std::move(value);
+								} else if (key == "latitude") {
+									cameras.back().latitude = std::stof(value);
+								} else if (key == "longitude") {
+									cameras.back().longitude = std::stof(value);
+								} else if (key == "url") {
+									cameras.back().url = std::move(value);
+								} else if (key == "encoding") {
+									cameras.back().encoding = std::move(value);
+								} else if (key == "update_rate") {
+									cameras.back().update_rate = std::move(value);
+								} else if (key == "marked_for_review"){
+									cameras.back().marked_for_review = std::move(value);
+								}
+							}
+						}
+						if (line[i] == '}' || line[i] == ']') {
+							if (nesting == CAMERA) {
+								cameras.back().state = cur_state;
+								cameras.back().county = cur_county;
+								cameras.emplace_back();
+							}
+							nesting = static_cast<NEST>(nesting-1);
+						}
+						key.clear();
+						break;
+					default:
+						// no point of checking if in key because key must be string
+						value.push_back(line[i]);
+						break;
+				}
+			}
+			// LOGGING
+			// std::cout << std::endl << "char: " << line[i] << " i: " << i;
+			// std::cout << " [instring, escaped, keyended]: [" << in_string << ", ";
+			// std::cout << escaped << ", " << key_ended << "] " << "key: ";
+			// std::cout << key << " value: " << value << " nesting: ";
+			// std::cout << nesting << " size: " << cameras.size();
+		}
+	}
+	cameras.pop_back();
+	file.close();
+	return cameras;
 }

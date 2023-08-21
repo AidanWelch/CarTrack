@@ -1,3 +1,5 @@
-build/*
-opencv/
-.vscode
+build
+opencv
+.vs
+out
+.cache

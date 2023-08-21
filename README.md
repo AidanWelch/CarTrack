@@ -14,5 +14,7 @@ An open-source tool to track and identify cars on publicly accessible traffic ca
 3. ~~Profit~~ Run the executable in build
 
 Disclaimer:
-This tool is provided under absolutely no guarantee of accuracy.  Like any AI system it is fallible and should not be considered any form of proof of guilt, especially in a court of law.
-By using this tool you agree to not use as any form of evidence of guilt, or liability- but it may be used in defense.
+This tool is provided under absolutely no guarantee of accuracy.  Like any AI system
+it is fallible and should not be considered any form of proof of guilt, especially
+in a court of law.  By using this tool you agree to not use as any form of evidence
+of guilt, or liability- but it may be used in defense as it can cast reasonable doubt.

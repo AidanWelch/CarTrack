@@ -2,20 +2,15 @@
 #define CARTRACK_UTILS_CAMERALISTPARSER_H_
 
 #include <string>
-#include <deque>
-#include <map>
-#include <list>
+#include <vector>
 
 struct Camera {
-	std::string description, direction, latitude, longitude;
+	float latitude, longitude;
+	std::string state, county, description, direction;
 	std::string url, encoding, format, update_rate, marked_for_review;
 };
 
-//typedef std::deque <Camera> County;
-typedef std::list <Camera> County;
-typedef std::map <std::string, County> State;
-typedef std::map <std::string, State> CameraList;
-// Structured [(state_name, [(county_name, [cameras]), ...]), ...]
+using CameraList = std::vector <Camera>;
 
 CameraList CameraParse(std::string file_path);
 

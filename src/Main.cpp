@@ -1,15 +1,24 @@
-#include <iostream> //namespace std
+#include <iostream>
+#include <span>
+#include <ostream>
 // #include <opencv2/opencv.hpp> //namespace cv
 #include "utils/camera_list_parser.h"
 
+
+std::ostream &operator<<(std::ostream &os, Camera const &c) {
+	return os << c.latitude << ", " << c.longitude << ' ' << c.state << ' ' << c.county << ' ' << c.description;
+}
+
 int main(int argc, char** argv){
-	CameraList cameras = CameraParse(argv[1]);
-	std::cout << "cams" << std::endl;
-	State ky = cameras["Kentucky"];
-	std::cout << "ky" << std::endl;
-	County jefferson = ky["Jefferson"];
-	std::cout << "jeff" << std::endl;
-	Camera cam = jefferson.front();
-	std::cout << cam.description << std::endl;
+	if ( argc == 0 ) {
+		std::cerr << "Provide a path to the camera list" << std::endl;
+		return 1;
+	}
+	auto args = std::span(argv, size_t(argc));
+	CameraList cameras = CameraParse(args[1]);
+	std::cout << cameras.size() << std::endl;
+	std::cout << cameras.front() << std::endl;
+	std::cout << cameras.back() << std::endl;
 	return 0;
 }
+
