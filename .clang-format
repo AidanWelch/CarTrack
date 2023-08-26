@@ -1,0 +1,86 @@
+BasedOnStyle: llvm
+UseTab: AlignWithSpaces
+TabWidth: 4
+IndentWidth: 4
+ContinuationIndentWidth: 4
+BreakBeforeBraces: Attach
+InsertBraces: true
+MaxEmptyLinesToKeep: 1
+ColumnLimit: 100
+LineEnding: LF
+SpacesInParens: Custom
+SpacesInParensOptions:
+  InEmptyParentheses: false
+  InCStyleCasts: false
+  InConditionalStatements: true
+  Other: true
+Standard: Latest
+AlignOperands: DontAlign
+AlignTrailingComments:
+  Kind: Never
+ReflowComments: false
+SpacesBeforeTrailingComments: 2
+SpacesInAngles: false
+SpacesInLineCommentPrefix:
+  Minimum: 2
+  Maximum: 2
+AlignConsecutiveShortCaseStatements:
+  Enabled: false
+BinPackArguments: true
+BinPackParameters: true
+PointerAlignment: Left
+QualifierAlignment: Left
+ReferenceAlignment: Left
+AlignAfterOpenBracket: DontAlign
+AlwaysBreakBeforeMultilineStrings: false
+CompactNamespaces: false
+IndentExternBlock: Indent
+IndentWrappedFunctionNames: true
+AlignEscapedNewlines: DontAlign
+BraceWrapping:
+  AfterCaseLabel:  false
+  AfterClass:      false
+  AfterControlStatement: Never
+  AfterEnum:       false
+  AfterExternBlock: false
+  AfterFunction:   false
+  AfterNamespace:  false
+  AfterObjCDeclaration: false
+  AfterStruct:     false
+  AfterUnion:      false
+  BeforeCatch:     false
+  BeforeElse:      false
+  BeforeLambdaBody: false
+  BeforeWhile:     false
+  IndentBraces:    false
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false
+BreakArrays: false 
+IndentCaseLabels: true
+AlignConsecutiveAssignments:
+  Enabled:         false
+  AcrossEmptyLines: false
+  AcrossComments:  false
+  AlignCompound:   false
+  PadOperators:    true
+AlignConsecutiveBitFields:
+  Enabled:         false
+  AcrossEmptyLines: false
+  AcrossComments:  false
+  AlignCompound:   false
+  PadOperators:    true
+AlignConsecutiveDeclarations:
+  Enabled:         false
+  AcrossEmptyLines: false
+  AcrossComments:  false
+  AlignCompound:   false
+  PadOperators:    true
+AlignConsecutiveMacros:
+  Enabled:         false
+  AcrossEmptyLines: false
+  AcrossComments:  false
+  AlignCompound:   false
+  PadOperators:    true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCaseColon: false

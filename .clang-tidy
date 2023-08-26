@@ -1,8 +1,12 @@
-Checks: '-*,bugprone-*,clang-diagnostic-*,clang-analyzer-*,cppcoreguidelines-*,modernize-*,-modernize-use-trailing-return-type'
+Checks: >- 
+  *,-llvmlibc-*,-llvm-header-guard,-modernize-use-trailing-return-type,
+  -altera-struct-pack-align,-cppcoreguidelines-pro-type-member-init,
+  -hicpp-member-init,-altera-unroll-loops,-fuchsia-default-arguments-calls,
+  -fuchsia-overloaded-operator
 WarningsAsErrors: true
 HeaderFilterRegex: '.*'
 AnalyzeTemporaryDtors: false
-FormatStyle: file
+FormatStyle: 'file'
 CheckOptions:
   - key:             cert-dcl16-c.NewSuffixes
     value:           'L;LL;LU;LLU'
@@ -32,3 +36,9 @@ CheckOptions:
     value:           llvm
   - key:             modernize-use-nullptr.NullMacros
     value:           'NULL'
+  - key:             readability-function-cognitive-complexity.Threshold
+    value:           '100'
+  - key:             readability-identifier-length.IgnoredVariableNames
+    value:           '^[c]$'
+  - key:             readability-identifier-length.IgnoredParameterNames
+    value:           '^[c]$'

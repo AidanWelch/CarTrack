@@ -1,5 +1,5 @@
-#ifndef CARTRACK_UTILS_CAMERALISTPARSER_H_
-#define CARTRACK_UTILS_CAMERALISTPARSER_H_
+#ifndef CARTRACK_UTILS_READCAMERAS_H_
+#define CARTRACK_UTILS_READCAMERAS_H_
 
 #include <string>
 #include <vector>
@@ -10,8 +10,8 @@ struct Camera {
 	std::string url, encoding, format, update_rate, marked_for_review;
 };
 
-using CameraList = std::vector <Camera>;
+using CameraVector = std::vector<Camera>;
 
-CameraList CameraParse(std::string file_path);
+CameraVector read_cameras( char*& file_path );
 
 #endif
