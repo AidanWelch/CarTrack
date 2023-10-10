@@ -5,7 +5,6 @@ Checks: >-
   -fuchsia-overloaded-operator
 WarningsAsErrors: true
 HeaderFilterRegex: '.*'
-AnalyzeTemporaryDtors: false
 FormatStyle: 'file'
 CheckOptions:
   - key:             cert-dcl16-c.NewSuffixes

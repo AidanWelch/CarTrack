@@ -6,7 +6,7 @@ An open-source tool to track and identify cars on publicly accessible traffic ca
 ### Prerequisites
 - CMake
 - Ninja
-- clang-tidy-17 and clang-format-17
+- clang-tidy-18 and clang-format-18
 
 Tip:
 See [llvm repositories](https://apt.llvm.org/)
