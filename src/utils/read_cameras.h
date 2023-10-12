@@ -6,6 +6,8 @@
 
 struct Camera {
 	float latitude, longitude;
+	Camera* left = nullptr;
+	Camera* right = nullptr;
 	std::string state, county, description, direction;
 	std::string url, encoding, format, update_rate, marked_for_review;
 };

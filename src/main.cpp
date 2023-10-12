@@ -3,6 +3,7 @@
 #include <ostream>
 #include <span>
 // #include <opencv2/opencv.hpp> //namespace cv
+#include "utils/camera_kd_tree.h"
 #include "utils/read_cameras.h"
 
 std::ostream& operator<<( std::ostream& os, const Camera& c ) {
@@ -18,6 +19,10 @@ int main( int argc, char** argv ) {
 	}
 	auto args = std::span( argv, static_cast<uint_fast16_t>( argc ) );
 	CameraVector cameras = read_cameras( args[1] );
+	std::cout << cameras.size() << '\n';
+	std::cout << cameras.front() << '\n';
+	std::cout << cameras.back() << '\n';
+	camera_kd_tree( cameras );
 	std::cout << cameras.size() << '\n';
 	std::cout << cameras.front() << '\n';
 	std::cout << cameras.back() << '\n';

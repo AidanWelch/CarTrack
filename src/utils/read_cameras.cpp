@@ -1,11 +1,12 @@
 #include "read_cameras.h"
+#include <cstdint>
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
 #include <string>
 #include <utility>
 
-enum NEST { NONE, COUNTRY, STATE, COUNTY, CAMERA, LOCATION };
+enum NEST : std::uint8_t { NONE, COUNTRY, STATE, COUNTY, CAMERA };
 
 CameraVector read_cameras( char*& file_path ) {
 	std::ifstream file;
@@ -87,7 +88,7 @@ CameraVector read_cameras( char*& file_path ) {
 						[[fallthrough]];  // Fallthrough if last member not pushed(it generally isn't)
 					case ',':
 						key_ended = false;
-						if ( nesting == CAMERA || nesting == LOCATION ) {
+						if ( nesting == CAMERA ) {
 							if ( !key.empty() && !value.empty() ) {
 								if ( key == "description" ) {
 									cameras.back().description = std::move( value );
@@ -125,11 +126,11 @@ CameraVector read_cameras( char*& file_path ) {
 				}
 			}
 			// LOGGING
-			// std::cout << std::endl << "char: " << c << " i: " << i;
+			// std::cout << '\n' << "char: " << c;
 			// std::cout << " [instring, escaped, keyended]: [" << in_string << ", ";
 			// std::cout << escaped << ", " << key_ended << "] " << "key: ";
 			// std::cout << key << " value: " << value << " nesting: ";
-			// std::cout << nesting << " size: " << cameras.size();
+			// std::cout << static_cast<int>(nesting) << " size: " << cameras.size();
 		}
 	}
 	cameras.pop_back();
