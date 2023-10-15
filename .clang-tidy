@@ -1,7 +1,7 @@
 Checks: >- 
   *,-llvmlibc-*,-llvm-header-guard,-modernize-use-trailing-return-type,
   -altera-struct-pack-align,-cppcoreguidelines-pro-type-member-init,
-  -hicpp-member-init,-altera-unroll-loops,-fuchsia-default-arguments-calls,
+  -hicpp-member-init,-altera-unroll-loops,-fuchsia-default-arguments-*,
   -fuchsia-overloaded-operator
 WarningsAsErrors: true
 HeaderFilterRegex: '.*'
