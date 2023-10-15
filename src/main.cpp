@@ -22,7 +22,7 @@ int main( int argc, char** argv ) {
 	std::cout << cameras.size() << '\n';
 	std::cout << cameras.front() << '\n';
 	std::cout << cameras.back() << '\n';
-	camera_kd_tree( cameras );
+	camera_kd_tree_create( cameras, 0, static_cast<int>( cameras.size() ) );
 	std::cout << cameras.size() << '\n';
 	std::cout << cameras.front() << '\n';
 	std::cout << cameras.back() << '\n';
