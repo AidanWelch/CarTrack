@@ -1,0 +1,35 @@
+{
+	"my state": {
+		"my county": [
+			{
+				"description": "cam 0",
+				"longitude": 5.0,
+				"latitude": 1.1,
+				"url": "cam 0"
+			},
+			{
+				"description": "cam 1",
+				"longitude": 1.1,
+				"latitude": 5.0,
+				"url": "cam 1"
+			}
+		],
+		"other": [{"encoding":"inline test","longitude": -100,"latitude":-100,"url":"cam 2","description":"cam 2"}]
+	},
+	"other state": {
+		"other": [
+			{
+				"description": "cam 3",
+				"longitude": 5.0,
+				"latitude": 1.0,
+				"url": "cam 3"
+			},
+			{
+				"description": "cam 4",
+				"longitude": 5.0,
+				"latitude": 0.9,
+				"url": "cam 4"
+			}
+		]
+	}
+}

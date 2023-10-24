@@ -14,9 +14,12 @@ See [llvm repositories](https://apt.llvm.org/)
 
 ### Building
 
-1. Run relevant build script
-2. Run the command `ninja`
-3. ~~Profit~~ Run the executable in build
+1. Run relevant build script with `./build.sh Debug` or `./build.sh Release`
+2. Run the command `ninja` to build after changes
+3. ~~Profit~~ Run the executable in `bin` or `test` in `build` 
+
+### Tasks
+- Decide on appropriate data structures for quick nearest camera queries, little to no random insertion or deletion.
 
 Disclaimer:
 This tool is provided under absolutely no guarantee of accuracy.  Like any AI system
