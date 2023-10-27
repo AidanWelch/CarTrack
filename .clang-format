@@ -26,12 +26,12 @@ SpacesInLineCommentPrefix:
   Maximum: 2
 AlignConsecutiveShortCaseStatements:
   Enabled: false
-BinPackArguments: true
-BinPackParameters: true
+BinPackArguments: false
+BinPackParameters: false
 PointerAlignment: Left
 QualifierAlignment: Left
 ReferenceAlignment: Left
-AlignAfterOpenBracket: DontAlign
+AlignAfterOpenBracket: BlockIndent
 AlwaysBreakBeforeMultilineStrings: false
 CompactNamespaces: false
 IndentExternBlock: Indent
@@ -84,3 +84,5 @@ AlignConsecutiveMacros:
   PadOperators:    true
 SpaceBeforeAssignmentOperators: true
 SpaceBeforeCaseColon: false
+ExperimentalAutoDetectBinPacking: false
+AllowAllParametersOfDeclarationOnNextLine: true
